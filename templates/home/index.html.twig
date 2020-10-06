@@ -13,9 +13,9 @@
     <div class="card">
     <div class ="card-body">
     <h5 class="card-tilte">
-     <a href="{{path('property.show',{id:property.id, slug:property.slug})}}">{{property.title}}</a>
+     <a href="{{path('property.show',{id:property.id, slug:property.slug})}}" style="font-weight:bold;font-size:2rem">{{property.title}}</a>
     </h5>
-    <p class ="card-text">{{property.city}}({{property.postalCode}})</p>
+    <p class ="card-text" style="font-weight:bold;font-size:2rem">{{property.city}}({{property.postalCode}})</p>
     <p class ="text-primary" style ="font-weight:bold ;font-size:2rem">{{property.formattedPrice}}F</p>
     </div>
     </div>

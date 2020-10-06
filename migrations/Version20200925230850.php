@@ -14,7 +14,7 @@ final class Version20200925230850 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return '';
+        return 'table property';
     }
 
     public function up(Schema $schema): void
@@ -24,7 +24,8 @@ final class Version20200925230850 extends AbstractMigration
         ADD rooms INT NOT NULL, ADD bedrooms INT NOT NULL, 
         ADD floor INT NOT NULL, ADD price INT NOT NULL, 
         ADD heat INT NOT NULL, ADD city VARCHAR(255) NOT NULL, 
-        ADD address VARCHAR(255) NOT NULL, ADD postal_code VARCHAR(255) NOT NULL, ADD sold TINYINT(1) NOT NULL, ADD created_at DATETIME NOT NULL');
+        ADD address VARCHAR(255) NOT NULL, ADD postal_code VARCHAR(255) NOT NULL,
+        ADD sold TINYINT(1) NOT NULL, ADD created_at DATETIME NOT NULL');
     }
 
     public function down(Schema $schema): void
