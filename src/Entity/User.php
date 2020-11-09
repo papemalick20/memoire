@@ -2,14 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\UsernameRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * @ORM\Entity(repositoryClass=UsernameRepository::class)
+ * @ORM\Entity(repositoryClass=UserRepository::class)
  */
-class Username implements UserInterface
+class User implements UserInterface
 {
     /**
      * @ORM\Id
@@ -33,11 +33,6 @@ class Username implements UserInterface
      * @ORM\Column(type="string")
      */
     private $password;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $user;
 
     public function getId(): ?int
     {
@@ -115,17 +110,5 @@ class Username implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
-    }
-
-    public function getUser(): ?string
-    {
-        return $this->user;
-    }
-
-    public function setUser(string $user): self
-    {
-        $this->user = $user;
-
-        return $this;
     }
 }

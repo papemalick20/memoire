@@ -2,7 +2,7 @@
 
 namespace App\Security;
 
-use App\Entity\Username;
+use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,7 +20,7 @@ use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticato
 use Symfony\Component\Security\Guard\PasswordAuthenticatedInterface;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
-class LoginFormAuthentificatorAuthenticator extends AbstractFormLoginAuthenticator implements PasswordAuthenticatedInterface
+class LoginformAuthentificatorAuthenticator extends AbstractFormLoginAuthenticator implements PasswordAuthenticatedInterface
 {
     use TargetPathTrait;
 
@@ -67,7 +67,7 @@ class LoginFormAuthentificatorAuthenticator extends AbstractFormLoginAuthenticat
             throw new InvalidCsrfTokenException();
         }
 
-        $user = $this->entityManager->getRepository(Username::class)->findOneBy(['email' => $credentials['email']]);
+        $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $credentials['email']]);
 
         if (!$user) {
             // fail authentication with a custom error
@@ -93,7 +93,7 @@ class LoginFormAuthentificatorAuthenticator extends AbstractFormLoginAuthenticat
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $providerKey)
     {
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
-            return new RedirectResponse($targetPath);
+            return new RedirectResponse($this->urlGenerator->generate('home'));
         }
 
         // For example : return new RedirectResponse($this->urlGenerator->generate('some_route'));
