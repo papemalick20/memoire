@@ -1,15 +1,15 @@
 <?php
 
 namespace App\Controller;
+
 use App\Entity\User;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-//use Symfony\Component\Security\Core\Encoder\UserPasswordEncode;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class RegisterController extends AbstractController
 {
@@ -18,37 +18,36 @@ class RegisterController extends AbstractController
      */
     public function register(Request $request, UserPasswordEncoderInterface $passEncoder)
     {
-     $form= $this->createFormBuilder()
-          ->add('email')
-          ->add('password', RepeatedType::class,[
-            'type'=> PasswordType::class,
-            'required'=> true,
-            'first_options'=> ['label'=> 'password'],
-            'second_options'=> ['label'=> 'confirm password']
+        $form = $this->createFormBuilder()
+            ->add('email')
+            ->add('password', RepeatedType::class, [
+                'type' => PasswordType::class,
+                'required' => true,
+                'first_options' => ['label' => 'password'],
+                'second_options' => ['label' => 'confirm password']
             ])
-            ->add('register', SubmitType::class,[
-             'attr' =>[
-              'class'=> 'btn btn-success float-right'
-             ]
+            ->add('register', SubmitType::class, [
+                'attr' => [
+                    'class' => 'btn btn-success float-right'
+                ]
             ])
             ->getForm();
-            $form->handleRequest($request);
-            if($form->isSubmitted()){
+        $form->handleRequest($request);
+        if ($form->isSubmitted()) {
             $data = $form->getData();
 
             $user = new User();
             $user->setEmail($data['email']);
             $user->setPassword(
-            $passEncoder->encodePassword($user, $data['password'])
+                $passEncoder->encodePassword($user, $data['password'])
             );
-            $em=$this->getDoctrine()->getManager();
+            $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
             return $this->redirect($this->generateUrl('app_login'));
-            }
-             return $this->render('register/index.html.twig', [
-                        'form' => $form->createView()
-                    ]);
-
+        }
+        return $this->render('register/index.html.twig', [
+            'form' => $form->createView()
+        ]);
     }
 }

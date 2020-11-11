@@ -27,7 +27,7 @@ class Property
     private $id;
 
     /**
-     * @Assert\Length(min=5, max=250)
+     * @Assert\Length(min=5,      max=250)
      * @ORM\Column(type="string", length=255)
      */
     private $title;
@@ -39,7 +39,7 @@ class Property
 
     /**
      * @ORM\Column(type="integer")
-     * @Assert\Range(min=10, max=400)
+     * @Assert\Range(min=10,       max=400)
      */
     private $surface;
 
@@ -80,7 +80,7 @@ class Property
 
     /**
      * @Assert\Regex("/^[0-9]{5}$/")
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string",    length=255)
      */
     private $postal_code;
 

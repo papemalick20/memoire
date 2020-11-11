@@ -22,7 +22,7 @@
  {% for property in properties %}
   <tr>
    <td>{{property.title}}</td>
-   <td>{{property.city}}</td>
+   
      <td>
      <a href ="{{path('admin.property.edit',{id:property.id}) }}" class="btn btn-secondary">Editer</a>
      <form method ="post" action="{{path('admin.property.delete',{id : property.id})}}"
