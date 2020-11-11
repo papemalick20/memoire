@@ -13,7 +13,7 @@ class Propertysearch
       * @var int|null
       */
       private $minSurface;
-      
+
 
     /**
      * Get the value of maxPrice

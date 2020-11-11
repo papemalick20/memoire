@@ -25,7 +25,7 @@ class AdminPropertyController extends AbstractController
      *
      * @var ObjectManager
      */
-    private $manager;
+   
     public function __construct(PropertyRepository $repository)
     {
         //$this->manager= $manager;
