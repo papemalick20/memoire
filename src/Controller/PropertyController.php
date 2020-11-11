@@ -9,6 +9,8 @@ use Doctrine\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+ use Knp\Component\Pager\PaginatorInterface;
+ use Symfony\Component\HttpFoundation\Request;
 
 class PropertyController extends AbstractController
 {
@@ -30,12 +32,18 @@ class PropertyController extends AbstractController
      * @Route("/property", name="property.index")
      */
 
-    public function index(): Response
+    public function index(PaginatorInterface $paginator, Request $request): Response
     {
-        $property = $this->repository->findAllVisible();
+        $properties = $paginator->paginate(
+        $this->repository->findAllVisibleQuery(),
+           $request->query->getInt('page', 1), /*page number*/
+                  9 /*limit per page*/
+
+        );
 
         return $this->render('property/index.html.twig', [
-            'current_menu' => 'properties'
+            'current_menu' => 'properties',
+            'properties' => $properties
         ]);
     }
     /**
