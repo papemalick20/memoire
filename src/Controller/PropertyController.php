@@ -3,6 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Property;
+use App\Entity\Propertysearch;
+use App\Form\PropertysearchType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use App\Repository\PropertyRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\Persistence\ObjectManager;
@@ -34,8 +37,11 @@ class PropertyController extends AbstractController
 
     public function index(PaginatorInterface $paginator, Request $request): Response
     {
+        $search = new Propertysearch();
+        $form = $this->createForm(PropertysearchType::class, $search);
+        $form->handleRequest($request);
         $properties = $paginator->paginate(
-            $this->repository->findAllVisibleQuery(),
+            $this->repository->findAllVisibleQuery($search),
             $request->query->getInt('page', 1), /*page number*/
             9 /*limit per page*/
 
@@ -43,7 +49,8 @@ class PropertyController extends AbstractController
 
         return $this->render('property/index.html.twig', [
             'current_menu' => 'properties',
-            'properties' => $properties
+            'properties' => $properties,
+            'form' => $form->createView()
         ]);
     }
     /**
