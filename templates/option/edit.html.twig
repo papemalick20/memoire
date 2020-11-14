@@ -3,12 +3,13 @@
 {% block title %}Editer les options{% endblock %}
 
 {% block body %}
+<div class="container">
     <h1>Edit Option</h1>
-
+</div>
     {{ include('option/_form.html.twig', {'button_label': 'Modifier'}) }}
-  {# <div class="container">
+  {# {# <div class="container">
   <br/>
     <a href="{{ path('option_index') }}"class ="btn btn-secondary">listes options</a>
     </div> #}
-    {{ include('option/_delete_form.html.twig') }}
+    {#{# include('option/_delete_form.html.twig') }} #}
 {% endblock %}

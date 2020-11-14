@@ -73,7 +73,8 @@ class AdminPropertyController extends AbstractController
     public function edit(Property $property, Request $request, EntityManagerInterface $manager): Response
     {
 
-        $form = $this->createForm(PropertyType::class, $property);
+        $form = $this->createForm(PropertyType::class,  $property);
+        
 
         $form->handleRequest($request);
 

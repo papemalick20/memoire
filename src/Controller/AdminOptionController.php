@@ -19,7 +19,9 @@ class AdminOptionController extends AbstractController
      * @Route("/", name="option_index", methods={"GET"})
      */
     public function index(OptionRepository $optionRepository): Response
-    {
+    { 
+        $option = new Option();
+        
         return $this->render('option/index.html.twig', [
             'options' => $optionRepository->findAll(),
         ]);
@@ -28,7 +30,7 @@ class AdminOptionController extends AbstractController
     /**
      * @Route("/new", name="option_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Option $option, Request $request): Response
     {
         $option = new Option();
         $form = $this->createForm(OptionType::class, $option);
