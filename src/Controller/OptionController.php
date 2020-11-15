@@ -31,6 +31,7 @@ class OptionController extends AbstractController
     public function new(Request $request): Response
     {
         $option = new Option();
+        $option->setName('name');
         $form = $this->createForm(OptionType::class, $option);
         $form->handleRequest($request);
 

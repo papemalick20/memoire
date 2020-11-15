@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Property;
+use App\Entity\Option;
 use App\Form\PropertyType;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -50,10 +51,12 @@ class AdminPropertyController extends AbstractController
     public function new(Request $request, EntityManagerInterface $manager): Response
     {
         $property = new Property;
+        //$options = new Option();
         $form = $this->createForm(PropertyType::class, $property);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $manager->persist($property);
+            //$manager->persist($options);
             $manager->flush();
             $this->addFlash('success', 'Bien créer avec succès');
             return $this->redirectToRoute('admin_property');
@@ -61,6 +64,7 @@ class AdminPropertyController extends AbstractController
         return $this->render(
             'admin_property/new.html.twig', [
             'property' => $property,
+            //'options'=>$options,
             'form' => $form->createView()
             ]
         );
@@ -72,14 +76,15 @@ class AdminPropertyController extends AbstractController
 
     public function edit(Property $property, Request $request, EntityManagerInterface $manager): Response
     {
-
+   
         $form = $this->createForm(PropertyType::class,  $property);
+        // $form = $this->createForm(PropertyType::class,  $options);
         
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
+            
             $manager->flush();
             $this->addFlash('success', 'Bien modifié avec succès');
             return $this->redirectToRoute('admin_property');
