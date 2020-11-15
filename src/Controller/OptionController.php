@@ -13,15 +13,13 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/option")
  */
-class AdminOptionController extends AbstractController
+class OptionController extends AbstractController
 {
     /**
      * @Route("/", name="option_index", methods={"GET"})
      */
     public function index(OptionRepository $optionRepository): Response
-    { 
-        $option = new Option();
-        
+    {
         return $this->render('option/index.html.twig', [
             'options' => $optionRepository->findAll(),
         ]);
@@ -30,7 +28,7 @@ class AdminOptionController extends AbstractController
     /**
      * @Route("/new", name="option_new", methods={"GET","POST"})
      */
-    public function new(Option $option, Request $request): Response
+    public function new(Request $request): Response
     {
         $option = new Option();
         $form = $this->createForm(OptionType::class, $option);
@@ -50,15 +48,15 @@ class AdminOptionController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/{id}", name="option_show", methods={"GET"})
-     */
-    public function show(Option $option): Response
-    {
-        return $this->render('option/show.html.twig', [
-            'option' => $option,
-        ]);
-    }
+    // /**
+    //  * @Route("/{id}", name="option_show", methods={"GET"})
+    //  */
+    // public function show(Option $option): Response
+    // {
+    //     return $this->render('option/show.html.twig', [
+    //         'option' => $option,
+    //     ]);
+    // }
 
     /**
      * @Route("/{id}/edit", name="option_edit", methods={"GET","POST"})

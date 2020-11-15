@@ -1,14 +1,8 @@
-<div class="container mt-4">
- {{ form_start(form) }}
+
+{{ form_start(form) }}
+<div class="container">
     {{ form_widget(form) }}
-    <br/>
-    <tr>
-    <td>
-    <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
-    {# <a href="{{ path('option_index') }}" class="btn btn-secondary"style="display:inline-block" >listes options</a> #}
-    <td>
-    </tr>
+    <button class="btn btn-dark">{{ button_label|default('Enregistrer') }}</button>
     </div>
 {{ form_end(form) }}
 
-</div>

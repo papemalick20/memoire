@@ -107,6 +107,17 @@ class Property
         $this->options = new ArrayCollection();
     }
 
+    // /**
+    //  * @ORM\ManyToMany(targetEntity=Option::class, inverseBy="properties")
+    //  */
+    // /*private $options;*/
+
+    // /*public function __construct()
+    // {
+    //     $this->created_at = new DateTime();
+    //     $this->options = new ArrayCollection();
+    // }*/
+
     public function getId(): ?int
     {
         return $this->id;
@@ -279,6 +290,8 @@ class Property
 
         return $this;
     }
+
+   
 
     /**
      * @return Collection|Option[]
